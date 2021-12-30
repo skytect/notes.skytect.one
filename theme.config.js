@@ -16,7 +16,7 @@ export default {
   floatTOC: true,
   logo: (
     <>
-      <Image src="/icon-512.png" width={32} height={32}></Image>
+      <Image src="/icon-512.png" alt="" width={32} height={32}></Image>
       <span className="ml-2 font-semibold hidden md:inline">skytect</span>
     </>
   ),
