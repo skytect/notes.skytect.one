@@ -1,14 +1,17 @@
-const withNextra = require('nextra')({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.js',
+const withNextra = require("nextra")({
+  theme: "nextra-theme-docs",
+  themeConfig: "./theme.config.js",
   unstable_staticImage: true,
-})
-module.exports = withNextra({
-  i18n: {
-    locales: ['en', 'zh', 'ja'],
-    defaultLocale: 'en',
+});
+module.exports = withNextra(
+  {
+    i18n: {
+      locales: ["en", "zh", "ja"],
+      defaultLocale: "en",
+    },
   },
-}, {
-  poweredByHeader: false,
-  reactStrictMode: true
-})
+  {
+    poweredByHeader: false,
+    reactStrictMode: true,
+  }
+);

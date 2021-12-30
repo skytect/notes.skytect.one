@@ -3561,7 +3561,7 @@ next-themes@^0.0.8:
   resolved "https://registry.yarnpkg.com/next-themes/-/next-themes-0.0.8.tgz#2a1748317085afbc2509e2c32bd04af4f0f6cb7d"
   integrity sha512-dyrh+/bZW4hkecFEg2rfwOLLzU2UnE7KfiwcV0mIwkPrO+1n1WvwkC8nabgKA5Eoi8stkYfjmA72FxTaWEOHtg==
 
-next@12.0.7:
+next@^12.0.7:
   version "12.0.7"
   resolved "https://registry.yarnpkg.com/next/-/next-12.0.7.tgz#33ebf229b81b06e583ab5ae7613cffe1ca2103fc"
   integrity sha512-sKO8GJJYfuk9c+q+zHSNumvff+wP7ufmOlwT6BuzwiYfFJ61VTTkfTcDLSJ+95ErQJiC54uS4Yg5JEE8H6jXRA==
@@ -4099,6 +4099,11 @@ prepend-http@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
+
+prettier@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
+  integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==
 
 prism-react-renderer@^1.1.1, prism-react-renderer@^1.2.1:
   version "1.2.1"
