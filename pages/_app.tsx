@@ -1,9 +1,9 @@
-import { AppProps } from "next/app";
-import Head from "next/head";
-import Prism from "prism-react-renderer/prism";
-import "nextra-theme-docs/style.css";
+import { AppProps } from 'next/app'
+import Head from 'next/head'
+import Prism from 'prism-react-renderer/prism'
+import 'nextra-theme-docs/style.css'
 
-import "../styles/style.scss";
+import '../styles/style.scss'
 
 export default function Nextra({ Component, pageProps }: AppProps) {
   return (
@@ -26,8 +26,8 @@ export default function Nextra({ Component, pageProps }: AppProps) {
       </Head>
       <Component {...pageProps} />
     </>
-  );
+  )
 }
 
 // Code highlighting
-(typeof global !== "undefined" ? global : window).Prism = Prism;
+;(typeof global !== 'undefined' ? global : window).Prism = Prism

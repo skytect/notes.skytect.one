@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export default {
-  projectLink: "https://github.com/skytect/notes.skytect.one", // GitHub link in the navbar
-  docsRepositoryBase: "https://github.com/skytect/notes.skytect.one/blob/main", // base URL for the docs repository
-  titleSuffix: " — skytect",
+  projectLink: 'https://github.com/skytect/notes.skytect.one', // GitHub link in the navbar
+  docsRepositoryBase: 'https://github.com/skytect/notes.skytect.one/blob/main', // base URL for the docs repository
+  titleSuffix: ' — skytect',
   nextLinks: true,
   prevLinks: true,
   search: true,
@@ -34,14 +34,14 @@ export default {
       />
       <meta name="apple-mobile-web-app-title" content="kNoWLeDge" />
       <link rel="icon" href="/icons/favicon.ico" sizes="any" /> {/*32x32*/}
-      <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />{" "}
+      <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />{' '}
       {/*180x180*/}
       <link rel="manifest" href="/manifest.json" />
     </>
   ),
   i18n: [
-    { locale: "en", text: "English" },
-    { locale: "zh", text: "中文" },
-    { locale: "ja", text: "日本語" },
-  ],
-};
+    { locale: 'en', text: 'English' },
+    { locale: 'zh', text: '中文' },
+    { locale: 'ja', text: '日本語' }
+  ]
+}

@@ -1,24 +1,24 @@
 @font-face {
-  font-family: "Inter";
+  font-family: 'Inter';
   font-weight: 100 900;
-  src: url("/fonts/Inter.woff2") format("woff2-variations");
+  src: url('/fonts/Inter.woff2') format('woff2-variations');
   font-display: fallback;
 }
 
 @font-face {
-  font-family: "JetBrainsMono";
+  font-family: 'JetBrainsMono';
   font-weight: 100 800;
-  src: url("/fonts/JetBrainsMono.woff2") format("woff2-variations");
+  src: url('/fonts/JetBrainsMono.woff2') format('woff2-variations');
   font-display: fallback;
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 code,
 kbd,
 pre,
 samp {
-  font-family: "JetBrainsMono", monospace;
+  font-family: 'JetBrainsMono', monospace;
 }
