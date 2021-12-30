@@ -1,21 +1,21 @@
 @font-face {
     font-family: 'Inter';
+    font-weight: 100 900;
     src: url('/Inter.woff2') format("woff2-variations");
-    font-weight: 1 999;
+    font-display: fallback;
 }
 
 @font-face {
-    font-family: 'FiraCode';
-    src: url('/FiraCode.woff2') format("woff2-variations");
-    font-weight: 1 999;
+    font-family: 'JetBrainsMono';
+    font-weight: 100 800;
+    src: url('/JetBrainsMono.woff2') format("woff2-variations");
+    font-display: fallback;
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    font-display: fallback;
 }
 
 code, kbd, pre, samp {
-    font-family: 'FiraCode', monospace;
-    font-display: fallback;
+    font-family: 'JetBrainsMono', monospace;
 }
