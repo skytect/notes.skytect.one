@@ -16,8 +16,6 @@ export default function Nextra({ Component, pageProps }: AppProps) {
           type="font/woff2"
           crossOrigin="anonymous"
         />
-      </Head>
-      <Head>
         <link
           rel="preload"
           href="/fonts/JetBrainsMono.woff2"
