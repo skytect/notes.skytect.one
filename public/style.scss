@@ -12,8 +12,10 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    font-display: fallback;
 }
 
 code, kbd, pre, samp {
     font-family: 'FiraCode', monospace;
+    font-display: fallback;
 }
