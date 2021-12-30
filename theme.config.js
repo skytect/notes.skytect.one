@@ -16,7 +16,7 @@ export default {
   floatTOC: true,
   logo: (
     <>
-      <Image src="/icon-512.png" alt="" width={32} height={32}></Image>
+      <Image src="/icons/icon-512.png" alt="" width={32} height={32}></Image>
       <span className="ml-2 font-semibold hidden md:inline">skytect</span>
     </>
   ),
@@ -29,8 +29,8 @@ export default {
       <meta name="og:description" content="come forth and step into my realm of kNoWLeDge" />
       <meta name="apple-mobile-web-app-title" content="kNoWLeDge" />
 
-      <link rel="icon" href="/favicon.ico" sizes="any" /> {/*32x32*/}
-      <link rel="apple-touch-icon" href="/apple-touch-icon.png" /> {/*180x180*/}
+      <link rel="icon" href="/icons/favicon.ico" sizes="any" /> {/*32x32*/}
+      <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" /> {/*180x180*/}
       <link rel='manifest' href='/manifest.json' />
     </>
   ),
