@@ -1,3 +1,23 @@
+import { useSSG } from 'nextra/ssg'
+import {
+  getGithubRepoProps,
+  GithubRepoCard,
+} from '@/components/github-repo-card'
+
+export async function getStaticProps() {
+  const repo = await getGithubRepoProps('teamfreestuff/whitehacks-2021')
+  return {
+    props: {
+      ssg: {
+        repo: repo,
+      },
+    },
+    revalidate: 300,
+  }
+}
+
 # Whitehacks 2021
 
-to be migrated
+<br />
+
+<GithubRepoCard data={useSSG()?.repo}></GithubRepoCard>
