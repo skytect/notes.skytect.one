@@ -1,3 +1,140 @@
+@use 'sass:map';
+@use 'colors.scss';
+
+// override theme colors
+@mixin colored-body(
+  $foreground,
+  $text,
+  $background,
+  $sidebar-text,
+  $sidebar-selected-background,
+  $link,
+  $divider,
+  $search-text,
+  $highlight
+) {
+  background-color: $background;
+  color: $text;
+
+  .bg-white {
+    background-color: $background;
+  }
+
+  .sidebar,
+  nav,
+  hr {
+    border-color: $divider !important;
+  }
+
+  .sidebar {
+    li.active > a {
+      background-color: $sidebar-selected-background;
+      color: $text;
+    }
+
+    a,
+    button {
+      color: $sidebar-text;
+      &:hover {
+        background-color: $divider;
+        color: $text;
+      }
+    }
+  }
+
+  nav > a.no-underline {
+    color: $sidebar-text;
+  }
+
+  footer {
+    div:nth-child(1) {
+      a {
+        color: $foreground;
+
+        &:hover {
+          color: $link;
+        }
+      }
+    }
+
+    div:nth-child(3) {
+      span {
+        color: $foreground;
+      }
+
+      a {
+        color: $link;
+      }
+    }
+  }
+
+  main > a {
+    color: $link;
+  }
+
+  .nextra-search {
+    input {
+      border-color: $sidebar-selected-background;
+      background-color: inherit;
+      color: $text;
+
+      &::placeholder {
+        color: $search-text;
+      }
+    }
+
+    kbd {
+      border-color: $sidebar-selected-background;
+      color: $sidebar-selected-background;
+    }
+
+    ul {
+      border: 0;
+      background-color: $sidebar-selected-background;
+      li {
+        color: $text;
+        background-color: $sidebar-selected-background !important;
+      }
+      .highlight {
+        background-color: $highlight;
+      }
+    }
+  }
+
+  ::selection {
+    background-color: $highlight;
+  }
+}
+
+body {
+  @include colored-body(
+    $foreground: map.get(colors.$light, 'foreground-accent'),
+    $text: map.get(colors.$light, 'foreground'),
+    $background: map.get(colors.$light, 'background'),
+    $sidebar-text: map.get(colors.$light, 'foreground-accent'),
+    $sidebar-selected-background: map.get(colors.$light, 'background-accent'),
+    $link: map.get(colors.$light, 'link'),
+    $divider: map.get(colors.$light, 'background-accent'),
+    $search-text: map.get(colors.$light, 'foreground-accent'),
+    $highlight: map.get(colors.$light, 'highlight')
+  );
+}
+
+.dark body {
+  @include colored-body(
+    $foreground: map.get(colors.$dark, 'foreground-accent'),
+    $text: map.get(colors.$dark, 'foreground'),
+    $background: map.get(colors.$dark, 'background'),
+    $sidebar-text: map.get(colors.$dark, 'foreground-accent'),
+    $sidebar-selected-background: map.get(colors.$dark, 'background-accent'),
+    $link: map.get(colors.$dark, 'link'),
+    $divider: map.get(colors.$dark, 'background-accent'),
+    $search-text: map.get(colors.$dark, 'foreground-accent'),
+    $highlight: map.get(colors.$dark, 'highlight')
+  );
+}
+
+// fonts
 @font-face {
   font-family: 'Inter';
   font-weight: 100 900;

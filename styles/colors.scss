@@ -1,0 +1,30 @@
+@use 'sass:map';
+
+$light: (
+  'background': #ffffff,
+  'background-accent': #eef2f6,
+  'foreground': #000000,
+  'foreground-accent': #748094,
+  'link': #5a97db,
+  'highlight': #bbd6fb,
+);
+
+$dark: (
+  'background': #111111,
+  'background-accent': #2d3748,
+  'foreground': #f7fafc,
+  'foreground-accent': #748094,
+  'link': #4299e1,
+  'highlight': #77b376,
+);
+
+// original dark colors
+// $foreground: #748094;
+// $text: #f7fafc;
+// $background: #111111;
+// $sidebar-text: #a0aec0;
+// $sidebar-selected-background: #2d3748;
+// $link: #4299e1;
+// $divider: #1a202c;
+// $search-text: #4c5566;
+// $highlight: #77b376;
