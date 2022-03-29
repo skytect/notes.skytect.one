@@ -18,6 +18,29 @@ Note: Making any contact with any individuals is out of the scope of this challe
 
 _Solved by [@skytect](https://github.com/skytect)_
 
-todo
+Since he has a Twitter account, let's try doing [a simple Twitter search](https://twitter.com/search?q=lewis%20chan&src=typed_query&f=user). If we scroll down a little, we're able to find a very sus profile.
+
+![Twitter Search](/images/whitehacks-2022/beginning-of-a-journey-1.png)
+
+In the [profile](https://twitter.com/lewischan0601), there's a very sus pinned tweet.
+
+> Remember, when posting an image, make sure you have alt tags for accessibility.
+
+There seems to be only one image on the account.
+
+> ![Doge](/images/whitehacks-2022/beginning-of-a-journey-2.jpeg)
+
+If we _Inspect Element_ the image's source code, we get:
+
+```html
+<img
+  alt="Cybersecurity meme about password managers. WH2022{s0c1al_m3d14_4dv3ntur35}"
+  draggable="true"
+  src="https://pbs.twimg.com/media/FI-aw7IaUAAbbUn?format=jpg&amp;name=small"
+  class="css-9pa8cd"
+/>
+```
+
+We find the flag in the `alt` attribute.
 
 `WH2022{s0c1al_m3d14_4dv3ntur35}`

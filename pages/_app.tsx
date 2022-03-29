@@ -32,3 +32,5 @@ export default function Nextra({ Component, pageProps }: AppProps) {
 
 // Code highlighting
 ;(typeof global !== 'undefined' ? global : window).Prism = Prism
+
+require('prismjs/components/prism-java')
