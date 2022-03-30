@@ -8,7 +8,7 @@ Difficulty: Medium
 
 Space Department has found a web server where Shadowcore, a group of ransomware operators providing Ransomware-as-a-Service in Planet X26-10EG, monitors their C2 server from.
 
-Challenge Access:
+Challenge Access: \
 [http://challenges1.whitehacks.xyz:5001]()
 [http://challenges2.whitehacks.xyz:5001]()
 
@@ -18,6 +18,78 @@ Let's retrieve their SSH key from the home directory at /home/r4s0m_4d1m1n/flag.
 
 _Solved by [@fishjojo1](https://github.com/fishjojo1)_
 
-todo
+### Recon!
+
+Upon visiting the site provided, we are greeted by
+
+![sign in page](/images/whitehacks-2022/ransom-console-1-1.png)
+
+Username and password fields...look interesting, but after playing around with a little, I didn't really get anywhere.
+
+The **right** answer here would be to go thru a basic checklist of sorts, looking at common directories like .git, robots.txt etc etc.
+
+_However_, if you had taken a look at ransom_console-2 — part 2 of the challenge, you would have spotted this.
+
+> Shadowcore discovered we stole their keys due to strong monitoring system on their upload page and discover what we were up to. They have hidden the key somewhere else. Fortunately, for us, we have managed to extract a snippet of their source code for their new dashboard they created as we were kicked out of their server. Let's hack them again, this time putting an end to all their operations.
+
+“their upload page” — hmm...perhaps we should check /uploads?
+
+Alternatively,
+
+Looking at robots.txt
+
+```
+User-agent: *
+Disallow: /upload /dashboard
+```
+
+Lets check /upload and /dashboard out, upload looks interesting
+
+### Playing around
+
+![upload page](/images/whitehacks-2022/ransom-console-1-2.png)
+
+What we find in /upload
+
+Had no clue what config file meant, but when in doubt, upload something random, lets try an image
+
+We are redirected to
+
+> Internal Server Error
+>
+> The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+
+Not very useful...but taking a look at the url we're redirected to —[http://challenges1.whitehacks.xyz:5001/xml-parse](http://challenges1.whitehacks.xyz:5001/xml-parse)
+
+This hopefully tells us, it's some sort of xml parser. Let's pass in some sample xml then
+
+Grabbed some sample xml from —> [https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ms762271(v=vs.85)](<https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ms762271(v=vs.85)>)
+
+![upload page but with stuff](/images/whitehacks-2022/ransom-console-1-3.png)
+
+Sweet! We see that we get the parsed xml.
+
+### The exploit
+
+XML has it's share of problems, here's one — XXE
+
+[Here's](<https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing>) a nice read
+
+XML supports processing of _entities_, variables if you will, which will allow us to perform the funny.
+
+Let's take a look at the exploit:
+
+```jsx
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "file:///home/r4s0m_4d1m1n/flag.txt"> ]>
+<stockCheck><productId>&xxe;</productId></stockCheck>
+```
+
+Here, we know that the flag is stored in /home/r4s0m_4d1m1n/flag.txt, now how to read it?
+
+`<!ENTITY xxe SYSTEM "file:///home/r4s0m_4d1m1n/flag.txt">` declares an external entity(read: variable), with the `SYSTEM` keyword, and the file: schema. In essence, it declares a varibale `xxe`, with the value of `/home/r4s0m_4d1m1n/flag.txt`. And we get the flag!
 
 `WH2022{SSH_KeY5_ST0L3n_8y_U5}`
+
+Recommended reading: \
+[https://portswigger.net/web-security/xxe/xml-entities](https://portswigger.net/web-security/xxe/xml-entities)
