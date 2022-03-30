@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "yarn run prettier -w ."
   },
   "dependencies": {
     "next": "^12.0.7",
@@ -31,6 +32,7 @@
     "arrowParens": "always",
     "singleQuote": true,
     "tabWidth": 2,
-    "semi": false
+    "semi": false,
+    "proseWrap": "always"
   }
 }

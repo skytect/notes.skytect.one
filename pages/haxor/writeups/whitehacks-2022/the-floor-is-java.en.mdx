@@ -6,7 +6,8 @@ Author: xbowery
 
 Difficulty: Easy
 
-We found some weird message that was accompanied within this file, can you decode this message and unlock the flag?
+We found some weird message that was accompanied within this file, can you
+decode this message and unlock the flag?
 
 <br />
 <a href="/files/whitehacks-2022/Reverse.class" download>
@@ -20,7 +21,8 @@ We found some weird message that was accompanied within this file, can you decod
 
 _Solved by [@skytect](https://github.com/skytect)_
 
-We get a compiled `Reverse.class` file, so let's decompile it to get the source code. We can do this at [jdec.app](https://jdec.app/).
+We get a compiled `Reverse.class` file, so let's decompile it to get the source
+code. We can do this at [jdec.app](https://jdec.app/).
 
 After that, we get this source code:
 
@@ -109,7 +111,8 @@ public class Reverse {
 }
 ```
 
-We can attempt to manually reverse engineer this. I did it using this python script:
+We can attempt to manually reverse engineer this. I did it using this python
+script:
 
 ```python
 cipher = ",hj*Y/bOi-(Tm0\"0qH,O[d2!'@qG-(-6"
