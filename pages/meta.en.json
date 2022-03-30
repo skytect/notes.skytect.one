@@ -11,5 +11,9 @@
   "wobots": {
     "title": "Wobots",
     "type": "nav"
+  },
+  "lingooeystics": {
+    "title": "Lingooeystics",
+    "type": "nav"
   }
 }
