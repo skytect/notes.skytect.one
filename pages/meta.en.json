@@ -4,15 +4,15 @@
     "type": "nav",
     "hidden": true
   },
-  "haxor": {
+  "hack": {
     "title": "Haxor",
     "type": "nav"
   },
-  "wobots": {
+  "robo": {
     "title": "Wobots",
     "type": "nav"
   },
-  "lingooeystics": {
+  "ling": {
     "title": "Lingooeystics",
     "type": "nav"
   }
