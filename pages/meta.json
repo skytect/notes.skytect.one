@@ -4,15 +4,15 @@
     "type": "page",
     "hidden": true
   },
-  "hack": {
+  "hacking": {
     "title": "Hacking",
     "type": "page"
   },
-  "robo": {
+  "robotics": {
     "title": "Robotics",
     "type": "page"
   },
-  "ling": {
+  "linguistics": {
     "title": "Linguistics",
     "type": "page"
   }

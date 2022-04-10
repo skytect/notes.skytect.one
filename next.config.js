@@ -9,14 +9,14 @@ module.exports = withNextra(
     redirects: async function () {
       return [
         {
-          source: '/hack/writeups/whitehacks-2022',
-          destination: '/hack/writeups/whitehacks-2022/summary',
+          source: '/hacking/writeups/whitehacks-2022',
+          destination: '/hacking/writeups/whitehacks-2022/summary',
           permanent: true,
           locale: undefined,
         },
         {
           source: '/haxor/writeups/whitehacks-2022',
-          destination: '/hack/writeups/whitehacks-2022/summary',
+          destination: '/hacking/writeups/whitehacks-2022/summary',
           permanent: true,
           locale: undefined,
         },
