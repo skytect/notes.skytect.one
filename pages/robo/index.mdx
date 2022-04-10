@@ -1,0 +1,10 @@
+import { useEffect } from 'react'
+
+{/* Workaround for https://github.com/shuding/nextra/issues/258 */}
+
+export default function redirect() {
+  useEffect(() => {
+    window.location.assign('https://hcrobo.gitbook.io/rcj/')
+  })
+  return <></>
+}

@@ -4,16 +4,20 @@ export default {
   projectLink: 'https://github.com/skytect/notes.skytect.one', // GitHub link in the navbar
   docsRepositoryBase: 'https://github.com/skytect/notes.skytect.one/blob/main', // base URL for the docs repository
   titleSuffix: ' — skytect',
-  nextLinks: true,
-  prevLinks: true,
-  search: true,
-  customSearch: null, // customizable, you can use algolia for example
-  darkMode: true,
-  font: false,
-  footer: true,
-  footerText: `GPLv3 ${new Date().getFullYear()}`,
-  footerEditLink: `Edit this page on GitHub`,
+  unstable_flexsearch: true,
+  defaultMenuCollapsed: true,
   floatTOC: true,
+  font: false,
+  footerText: (
+    <a
+      href="https://github.com/skytect/notes.skytect.one/blob/main/LICENSE"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="no-underline font-semibold"
+    >
+      GPLv3 {new Date().getFullYear()}
+    </a>
+  ),
   logo: (
     <>
       <Image src="/icons/icon-512.png" alt="" width={32} height={32}></Image>
@@ -33,15 +37,24 @@ export default {
         content="come forth and step into my realm of kNoWLeDge"
       />
       <meta name="apple-mobile-web-app-title" content="kNoWLeDge" />
-      <link rel="icon" href="/icons/favicon.ico" sizes="any" /> {/*32x32*/}
-      <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />{' '}
-      {/*180x180*/}
+      <link rel="icon" href="/icons/favicon.ico" sizes="any" />
+      <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
       <link rel="manifest" href="/manifest.json" />
+
+      <link
+        rel="preload"
+        href="/fonts/Inter.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/fonts/JetBrainsMono.woff2"
+        as="font"
+        type="font/woff2"
+        crossOrigin="anonymous"
+      />
     </>
   ),
-  i18n: [
-    { locale: 'en', text: 'English' },
-    { locale: 'zh', text: '中文' },
-    { locale: 'ja', text: '日本語' },
-  ],
 }

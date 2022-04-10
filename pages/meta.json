@@ -1,0 +1,19 @@
+{
+  "index": {
+    "title": "Introduction",
+    "type": "page",
+    "hidden": true
+  },
+  "hack": {
+    "title": "Hacking",
+    "type": "page"
+  },
+  "robo": {
+    "title": "Robotics",
+    "type": "page"
+  },
+  "ling": {
+    "title": "Linguistics",
+    "type": "page"
+  }
+}

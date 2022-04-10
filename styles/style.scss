@@ -78,8 +78,7 @@
 
   .nextra-search {
     input {
-      border-color: $sidebar-selected-background;
-      background-color: inherit;
+      background-color: $sidebar-selected-background;
       color: $text;
 
       &::placeholder {
@@ -89,7 +88,7 @@
 
     kbd {
       border-color: $sidebar-selected-background;
-      color: $sidebar-selected-background;
+      color: $search-text;
     }
 
     ul {
