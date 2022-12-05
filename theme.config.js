@@ -5,7 +5,7 @@ export default {
   docsRepositoryBase: 'https://github.com/skytect/notes.skytect.one/blob/main', // base URL for the docs repository
   titleSuffix: ' — skytect',
   unstable_flexsearch: true,
-  defaultMenuCollapsed: true,
+  defaultMenuCollapsed: false,
   floatTOC: true,
   font: false,
   footerText: (
