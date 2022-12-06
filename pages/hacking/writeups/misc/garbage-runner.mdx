@@ -1,0 +1,58 @@
+# Garbage Runner
+
+## Description
+
+CTF: Whitehacks 2022
+
+Author: xbowery
+
+Difficulty: Easy
+
+The mischievous aliens have dumped our lovely poster into the trash can, maybe
+you can walk through it to find some treasure?
+
+<br />
+<a href="/files/whitehacks-2022/treasure.pdf" download>
+  treasure.pdf
+</a>
+
+## Solution
+
+_Solved by [@skytect](https://github.com/skytect)_
+
+> maybe you walk through it
+
+Try `binwalk`?
+
+```bash
+$ binwalk treasure.pdf
+
+DECIMAL       HEXADECIMAL     DESCRIPTION
+--------------------------------------------------------------------------------
+0             0x0             PDF document, version: "1.7"
+630           0x276           Zlib compressed data, default compression
+1120          0x460           JPEG image data, JFIF standard 1.01
+1150          0x47E           TIFF image data, big-endian, offset of first image directory: 8
+16313         0x3FB9          JPEG image data, JFIF standard 1.01
+27201         0x6A41          JPEG image data, JFIF standard 1.01
+27231         0x6A5F          TIFF image data, big-endian, offset of first image directory: 8
+36866         0x9002          JPEG image data, JFIF standard 1.01
+36896         0x9020          TIFF image data, big-endian, offset of first image directory: 8
+65132         0xFE6C          JPEG image data, JFIF standard 1.01
+184978        0x2D292         Zlib compressed data, default compression
+185612        0x2D50C         Zlib compressed data, default compression
+208416        0x32E20         Zlib compressed data, default compression
+```
+
+Cool now let's `foremost` it to extract all the files nicely.
+
+```bash
+$ foremost -i treasure.pdf
+```
+
+After looking through the `output` folder, you would find a sus image in
+`output/jpg/00000002.jpg` with the flag:
+
+![image with flag](/images/whitehacks-2022/garbage-runner-1.jpg)
+
+`WH2022{m0r3_th4n_m33t5_th3_3y3}`

@@ -1,0 +1,114 @@
+# The Poem of Knowledge
+
+## Description
+
+CTF: Whitehacks 2022
+
+Author: xbowery
+
+Difficulty: Easy
+
+Our knowledgeable alien friend named Beale left us with a purported "Poem of
+Knowledge" before he went back to his universe.
+
+He also dropped a message behind. Can you decipher what he was trying to say?
+
+17-73-24-55-84-101-141-44-54-49-10-123-62-131-114-67-47-46-60-83-84
+
+Note: Please wrap the flag with `WH2022{...}` The flag is case-sensitive!
+
+<br />
+<a href="/files/whitehacks-2022/Poem" download>
+  Poem
+</a>
+
+## Solution
+
+_Solved by [@skytect](https://github.com/skytect)_
+
+We get a text:
+
+```
+The Road Not Taken
+By Robert Frost
+
+Two roads diverged in a yellow wood,
+And sorry I could not travel both
+And be one traveler, long I stood
+And looked down one as far as I could
+To where it bent in the undergrowth;
+
+Then took the other, as just as fair,
+And having perhaps the better claim,
+Because it was grassy and wanted wear;
+Though as for that the passing there
+Had worn them really about the same,
+
+And both that morning equally lay
+In leaves no step had trodden black.
+Oh, I kept the first for another day!
+Yet knowing how way leads on to way,
+I doubted if I should ever come back.
+
+I shall be telling this with a sigh
+Somewhere ages and ages hence:
+Two roads diverged in a wood, and I—
+I took the one less traveled by,
+And that has made all the difference.
+```
+
+And something that looks like a ciphertext:
+
+```
+17-73-24-55-84-101-141-44-54-49-10-123-62-131-114-67-47-46-60-83-84
+```
+
+> Our knowledgeable alien friend named Beale
+
+This gives us a hint. If we google `beale crypto`, we'll find the Beale ciphers,
+which use the numbers to lookup words in the text and uses the first letter of
+each word accordingly.
+
+We can write a simple script to help us decode this:
+
+```python
+import re
+
+key = """The Road Not Taken
+By Robert Frost
+
+Two roads diverged in a yellow wood,
+And sorry I could not travel both
+And be one traveler, long I stood
+And looked down one as far as I could
+To where it bent in the undergrowth;
+
+Then took the other, as just as fair,
+And having perhaps the better claim,
+Because it was grassy and wanted wear;
+Though as for that the passing there
+Had worn them really about the same,
+
+And both that morning equally lay
+In leaves no step had trodden black.
+Oh, I kept the first for another day!
+Yet knowing how way leads on to way,
+I doubted if I should ever come back.
+
+I shall be telling this with a sigh
+Somewhere ages and ages hence:
+Two roads diverged in a wood, and I—
+I took the one less traveled by,
+And that has made all the difference."""
+ciphertext = "17-73-24-55-84-101-141-44-54-49-10-123-62-131-114-67-47-46-60-83-84"
+
+key = re.sub(r'[^a-zA-Z\s\n]', '', key)  # remove everything that's not a letter, space, or newline
+key = re.sub(r'[\s\n]+', ' ', key)  # replace multiple spaces and newlines with single spaces
+key = key.split(' ')
+
+ciphertext = [int(i) for i in ciphertext.split('-')]  # 17 73 24 55 84 101 141 44 54 49 10 123 62 131 114 67 47 46 60 83 84
+ciphertext = [key[i-1][0] for i in ciphertext]
+print(''.join(ciphertext))  # WH2022{IHopeYouhadagreattime}
+```
+
+`WH2022{IHopeYouhadagreattime}`

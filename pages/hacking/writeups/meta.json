@@ -1,4 +1,11 @@
 {
-  "whitehacks-2022": "Whitehacks 2022",
-  "whitehacks-2021": "Whitehacks 2021"
+  "web": "Web",
+  "cloud": "Cloud",
+  "crypto": "Crypto",
+  "pwn": "Pwn",
+  "re": "Reversing",
+  "forensics": "Forensics",
+  "misc": "Misc",
+  "osint": "OSINT",
+  "ctf-archive": "CTF Archive"
 }

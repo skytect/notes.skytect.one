@@ -1,0 +1,32 @@
+# More than Meets the Eye?
+
+## Description
+
+CTF: Whitehacks 2021
+
+Is there something here
+that's‌​‌​‌‌‌⁠‌​​‌​​​⁠‌‌​​‌​⁠‌‌​​​​⁠‌‌​​‌​⁠‌‌​​​​⁠‌‌‌‌​‌‌⁠‌‌‌‌​‌​⁠‌‌​​‌‌⁠‌‌‌​​‌​⁠‌‌​​​​⁠‌​‌‌‌‌‌⁠‌‌‌​‌‌‌⁠‌‌​​​‌⁠‌‌​​‌​​⁠‌‌‌​‌​​⁠‌‌​‌​​​⁠‌​‌‌‌‌‌⁠‌‌​​​‌‌⁠‌‌​﻿‌​‌​‌‌‌⁠‌​​‌​​​⁠‌‌​​‌​⁠‌‌​​​​⁠‌‌​​‌​⁠‌‌​​​‌⁠‌‌‌‌​‌‌⁠‌‌‌‌​‌​⁠‌‌​​‌‌⁠‌‌‌​​‌​⁠‌‌​​​​⁠‌​‌‌‌‌‌⁠‌‌‌​‌‌‌⁠‌‌​​​‌⁠‌‌​​‌​​⁠‌‌‌​‌​​⁠‌‌​‌​​​⁠‌​‌‌‌‌‌⁠‌‌​​​‌‌⁠‌‌​‌​​​⁠‌​​​​​​⁠‌‌‌​​‌​⁠‌​​​​​​⁠‌‌​​​‌‌⁠‌‌‌​‌​​⁠‌‌​​‌‌⁠‌‌‌​​‌​⁠‌​‌‌‌‌‌⁠‌‌​​​‌‌⁠‌‌​​​​⁠‌‌‌​‌​‌⁠‌​​‌‌‌​⁠‌‌‌​‌​​⁠‌​‌​​‌‌⁠‌​‌‌‌‌‌⁠‌‌‌​‌​​⁠‌‌​​​​⁠‌‌​​​​⁠‌‌‌‌‌​‌﻿‌​​​⁠‌​​​​​​⁠‌‌‌​​‌​⁠‌​​​​​​⁠‌‌​​​‌‌⁠‌‌‌​‌​​⁠‌‌​​‌‌⁠‌‌‌​​‌​⁠‌​‌‌‌‌‌⁠‌‌​​​‌‌⁠‌‌​​​​⁠‌‌‌​‌​‌⁠‌​​‌‌‌​⁠‌‌‌​‌​​⁠‌​‌​​‌‌⁠‌​‌‌‌‌‌⁠‌‌‌​‌​​⁠‌‌​​​​⁠‌‌​​​​⁠‌‌‌‌‌​‌
+more than meets the eye?
+
+## Solution
+
+_Solved by [@teamfreestuff](https://github.com/teamfreestuff)_
+
+If you look carefully, there are several invisible unicode characters in the
+problem description above.
+
+![invisible unicode characters](/images/whitehacks-2021/more-than-meets-the-eye-1.png)
+
+This is clearly unicode steganography. The characters used are:
+
+- WORD JOINER (U+2060)
+- ZERO WIDTH SPACE (U+200B)
+- ZERO WIDTH NON-JOINER (U+200C)
+- ZERO WIDTH NO-BREAK SPACE (U+FEFF)
+
+If we search around, we are able to find an online unicode steganography
+decrypter.
+
+![[online decrypter](https://neatnik.net/steganographr)](/images/whitehacks-2021/more-than-meets-the-eye-2.png)
+
+`WH2021{z3r0_w1dth_ch@r@ct3r_c0uNtS_t00}`
