@@ -1,0 +1,179 @@
+# ransomware
+
+## Description
+
+CTF: STACK the Flags 2022
+
+**TO BE DONE**
+
+<br />
+<a href="/files/stacktheflags-2022/challenge2.apk" download>
+  challenge2.apk
+</a>
+
+## Solution
+
+_Pwned by [@skytect](https://github.com/skytect)_
+
+### Finding the encryption script
+
+Let's run the APK.
+
+Initially, we're presented with a page asking for permission to display over
+other apps.
+
+![app screen](/images/stacktheflags-2022/ransomware-1.png)
+
+If we follow the instructions, we're presented with a dialog overlay the next
+time we launch the app.
+
+![app dialog](/images/stacktheflags-2022/ransomware-2.png)
+
+As with any APK challenge, let's open [JADX](https://github.com/skylot/jadx).
+
+```bash
+jadx-gui challenge2.apk
+```
+
+We find a key!
+
+![JADX GUI](/images/stacktheflags-2022/ransomware-3.png)
+
+Let's try using the key with the dialog. After we successfully enter 16
+characters within 5 seconds on an Android emulator, the dialog is dismissed.
+
+If we dig further in JADX, we find code that suggests a decrypted file in
+`/data/data/com.jaga.app/flag_decrypt.txt`.
+
+![JADX GUI](/images/stacktheflags-2022/ransomware-4.png)
+
+Let's check out the file with `adb`.
+
+```
+❯ adb shell
+emu64a:/ $ su
+emu64a:/ # cat /data/data/com.jaga.app/flag_decrypt.txt
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String args[]) {
+      String pt = "??????????????????????????????";
+      String ct = "yu1gpulonjtqxn3ct6gkjxph";
+      String ring1 = "abcdefghijklmnopqrstuvwxyz{}1234567890";
+      String ring2 = "qw1234567890ertyuiopasdf{}ghjklzxcvbnm";
+      int initial_shift = 3;
+      int periodic_increment = 7;
+      int periodic_length = 4;
+
+      char[] ch = ring1.toCharArray();
+      char[] ch_pt = pt.toCharArray();
+
+      ring2 = shift(ring2, initial_shift);
+
+      int temp_period = periodic_length;
+      for (int i = 0; i < pt.length(); i++) {
+          temp_period--;
+
+          int index = new String(ch).indexOf(ch_pt[i]);
+          ct = ct + ring2.charAt(index);
+          if (temp_period == 0) {
+              ring2 = shift(ring2, periodic_increment);
+              temp_period = periodic_length;
+          }
+      }
+    }
+
+    public static String shift(String text, int shift) {
+        for (int i = 0; i < shift; i++) {
+            text = text.charAt(text.length() - 1) + text.substring(0, text.length() - 1);
+        }
+        return text;
+    }
+emu64a:/ #
+```
+
+It looks like we found some Java code we have to reverse engineer.
+
+```java
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String args[]) {
+      String pt = "??????????????????????????????";
+      String ct = "yu1gpulonjtqxn3ct6gkjxph";
+      String ring1 = "abcdefghijklmnopqrstuvwxyz{}1234567890";
+      String ring2 = "qw1234567890ertyuiopasdf{}ghjklzxcvbnm";
+      int initial_shift = 3;
+      int periodic_increment = 7;
+      int periodic_length = 4;
+
+      char[] ch = ring1.toCharArray();
+      char[] ch_pt = pt.toCharArray();
+
+      ring2 = shift(ring2, initial_shift);
+
+      int temp_period = periodic_length;
+      for (int i = 0; i < pt.length(); i++) {
+          temp_period--;
+
+          int index = new String(ch).indexOf(ch_pt[i]);
+          ct = ct + ring2.charAt(index);
+          if (temp_period == 0) {
+              ring2 = shift(ring2, periodic_increment);
+              temp_period = periodic_length;
+          }
+      }
+    }
+
+    public static String shift(String text, int shift) {
+        for (int i = 0; i < shift; i++) {
+            text = text.charAt(text.length() - 1) + text.substring(0, text.length() - 1);
+        }
+        return text;
+    }
+}
+```
+
+### Reversing the encryption script
+
+First, I rewrite and simplify the script in Python with some help from Copilot.
+
+```python
+def shift(text: str, shift: int) -> str:
+    for _ in range(shift):
+        text = text[-1] + text[:-1]
+    return text
+
+pt = "??????????????????????????????"
+ct = "yu1gpulonjtqxn3ct6gkjxph"
+ring1 = "abcdefghijklmnopqrstuvwxyz{}1234567890"
+ring2 = "bnmqw1234567890ertyuiopasdf{}ghjklzxcv"
+
+
+temp_period = 0
+for c in pt:
+    temp_period += 1
+
+    index = ring1.index(c)
+    ct += ring2[index]
+
+    if temp_period == 4:
+        ring2 = shift(ring2, 7)
+        temp_period = 0
+```
+
+After staring at the script for some time, I came up with the following solve
+script.
+
+```python
+ct = "yu1gpulonjtqxn3ct6gkjxph"
+pt = ""
+
+for i, c in enumerate(ct):
+    lookup = {a: b for a, b in zip(shift(ring2, 7*(i // 4)), ring1)}
+    pt += lookup[c]
+
+print(pt)  # stf22{c1ph4rsw1thatw15t}
+```
+
+`stf22{c1ph4rsw1thatw15t}`

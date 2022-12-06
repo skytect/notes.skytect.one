@@ -4,7 +4,12 @@
 
 CTF: Whitehacks 2021
 
-Fred Chee Hong Kat, a developer for Bug Bug Dev Ptd. Ltd, is a disgruntled employee with poor security hygiene! He has been flagged multiple times for poor password practices! Now, it finally hits him! Our threat intelligence feed discovered a set of leaked credentials available on the Dark Web. Can you help us investigate the matter? We need to know if our company's secrets are compromised!
+Fred Chee Hong Kat, a developer for Bug Bug Dev Ptd. Ltd, is a disgruntled
+employee with poor security hygiene! He has been flagged multiple times for poor
+password practices! Now, it finally hits him! Our threat intelligence feed
+discovered a set of leaked credentials available on the Dark Web. Can you help
+us investigate the matter? We need to know if our company's secrets are
+compromised!
 
 <br />
 <a href="/files/whitehacks-2021/creds.json" download>
@@ -13,7 +18,7 @@ Fred Chee Hong Kat, a developer for Bug Bug Dev Ptd. Ltd, is a disgruntled emplo
 
 ## Solution
 
-_Solved by [@teamfreestuff](https://github.com/teamfreestuff)_
+_Pwned by [@teamfreestuff](https://github.com/teamfreestuff)_
 
 A JSON file with credentials to a **Google Cloud service account** is provided.
 
@@ -32,7 +37,10 @@ A JSON file with credentials to a **Google Cloud service account** is provided.
 }
 ```
 
-We can use the python library [`google-cloud-storage`](https://pypi.org/project/google-cloud-storage/) to check if there is anything on **Cloud Storage** accessible by the service account.
+We can use the python library
+[`google-cloud-storage`](https://pypi.org/project/google-cloud-storage/) to
+check if there is anything on **Cloud Storage** accessible by the service
+account.
 
 ```python
 from google.cloud import storage

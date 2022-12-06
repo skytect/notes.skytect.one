@@ -1,0 +1,11 @@
+{
+  "web": "Web",
+  "cloud": "Cloud",
+  "crypto": "Crypto",
+  "pwn": "Pwn",
+  "re": "Reversing",
+  "forensics": "Forensics",
+  "misc": "Misc",
+  "osint": "OSINT",
+  "ctf-archive": "CTF Archive"
+}

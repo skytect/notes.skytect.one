@@ -1,0 +1,20 @@
+{
+  "*": {
+    "type": "page"
+  },
+  "index": {
+    "title": "Introduction",
+    "display": "hidden"
+  },
+  "hacking": {
+    "title": "Hacking"
+  },
+  "robotics": {
+    "title": "Robotics",
+    "href": "https://hcrobo.gitbook.io/rcj/",
+    "newWindow": true
+  },
+  "linguistics": {
+    "title": "Linguistics"
+  }
+}

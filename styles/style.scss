@@ -72,8 +72,17 @@
     }
   }
 
-  main > a {
-    color: $link;
+  main {
+    a {
+      color: $link;
+    }
+
+    // ensure images are not too tall
+    img {
+      width: auto;
+      max-height: 66vh;
+      margin: auto;
+    }
   }
 
   .nextra-search {
