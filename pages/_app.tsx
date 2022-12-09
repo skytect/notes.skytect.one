@@ -15,3 +15,4 @@ export default function Nextra({ Component, pageProps }: AppLayoutProps) {
 ;(typeof global !== 'undefined' ? global : window).Prism = Prism
 
 require('prismjs/components/prism-java')
+require('prismjs/components/prism-docker')

@@ -4,7 +4,12 @@
 
 CTF: STACK the Flags 2022
 
-**TO BE DONE**
+Jaga is on a road trip to find Nyan. Do you know which road is this in the
+meteverse?
+
+Note that for this challenge, the road name is case sensitive, example -
+`STF22{Jln_Binchang}`. The road name should be the exact address seen on Google
+Maps
 
 <br />
 <a href="/files/stacktheflags-2022/Finding Nyan.MOV" download>
@@ -16,6 +21,36 @@ CTF: STACK the Flags 2022
 _Pwned by [@skytect](https://github.com/skytect) and
 [@fishjojo1](https://github.com/fishjojo1)_
 
-**TO BE DONE**
+The video shows a very blurry view out of a car window, with Jaga riding around
+somewhere in Singapore.
+
+If we focus on one of the frames, we see the logo of the company doing the
+construction in the background.
+
+![Frame with Construction Banner](/images/stacktheflags-2022/finding-nyan-1.png)
+
+Let's try to identify the company. We can use Google to find a BCA directory for
+licensed builders at
+[www.bca.gov.sg/BCADirectory/Search/Result](https://www.bca.gov.sg/BCADirectory/Search/Result?page=-1&pCLSSelected=%2C83%7CA1&pGrading=A1&d=1).
+
+![BCA Directory](/images/stacktheflags-2022/finding-nyan-2.png)
+
+With some knowledge of Chinese, I can identify the first character "九" (jiǔ)
+corresponding to the "CHIU" in the directory. After a quick Google Search, I'm
+able to confirm that the company is called
+`Chiu Teng Construction Co. Pte. Ltd.` thanks to the presence of the red
+triangle in the logo.
+
+![Google Images Search of "CHIU TENG CONSTRUCTION CO. PTE. LTD."](/images/stacktheflags-2022/finding-nyan-3.png)
+
+Taking note that the construction site was along a long straight stretch of road
+next to a largely undeveloped forested area, we set out to scour the internet
+for tenders for building construction they have procured. After a while, we
+finally found the location. The tender was found on
+[www.sgpbusiness.com/company/Chiu-Teng-Construction-Co-Pte-Ltd/government-procurement/agency](https://www.sgpbusiness.com/company/Chiu-Teng-Construction-Co-Pte-Ltd/government-procurement/agency).
+
+![Tender](/images/stacktheflags-2022/finding-nyan-4.png)
+
+![Streetview](/images/stacktheflags-2022/finding-nyan-5.png)
 
 `STF22{BUKIT_BATOK_RD}`

