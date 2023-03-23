@@ -1,1 +1,25 @@
 # Soldering
+
+## Drag soldering
+
+A common way to solder SMD chips. Especially useful for our STM32 microcontroller and CD74HC4067 multiplexer.
+
+## Sussy soldering (reflow)
+
+oh no.
+
+## Miscellaneous
+
+In addition to reflow soldering, we cut off a few unused pins on the chip. For some mystical reason, ST decided to put Vin and GND right beside OutA/B. 
+
+**INSERT IMAGE**
+
+This combined with the fact that the pins are so close together caused many bridges during our soldering. Thus, we literally cut off these annoying pins that don't belong so that bridging would not occur in between these crucial pins. 
+
+**INSERT IMAGE**
+
+## Tips for soldering
+
+- use flux. It might be sticky, but can be cleaned up using alcohol (IPA)
+- for some components, don't be afraid to turn up the temperature (XT60s, chips with big heat slugs), but keep within max. recommended temperature based on datasheet
+- if you have the space, make the pads of the footprint longer
