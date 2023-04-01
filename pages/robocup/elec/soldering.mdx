@@ -2,11 +2,21 @@
 
 ## Drag soldering
 
-A common way to solder SMD chips. Especially useful for our STM32 microcontroller and CD74HC4067 multiplexer.
+A common way to solder SMD chips. Especially useful for our STM32 microcontroller and CD74HC4067 multiplexer. 
 
 ## Sussy soldering (reflow)
 
-oh no.
+oh no. 
+
+When we came around to soldering our motor drivers (VNH5050A), we realised that the pins of the driver are so close together, and drag soldering or normal pin-by-pin soldering just did not work. Furthermore, due to how our PCBs are designed, we need the heatslugs of the driver to be connected to the big exposed copper pad on the PCB. 
+
+**INSERT IMAGE**
+
+Previously, our seniors did this via melting some solder onto the pads and heatgunning the entire driver AFTER soldering on the pins. However, we found this ineffective (we were probably doing something wrong :skull:) and wanted another way to solder instead. 
+
+Behold, reflow soldering. Having no stencil bought, we tried our best to spread an even layer of solder paste on the footprint of the driver, and heatgun-ed the driver. The result turned out surprisingly well 😮
+
+**INSERT IMAGE**
 
 ## Miscellaneous
 
@@ -14,12 +24,13 @@ In addition to reflow soldering, we cut off a few unused pins on the chip. For s
 
 **INSERT IMAGE**
 
-This combined with the fact that the pins are so close together caused many bridges during our soldering. Thus, we literally cut off these annoying pins that don't belong so that bridging would not occur in between these crucial pins. 
+This combined with the fact that the pins are so close together caused many bridges during our soldering. So we literally cut off these annoying pins that don't belong so that bridging would not occur in between these crucial pins. 
 
 **INSERT IMAGE**
 
 ## Tips for soldering
 
 - use flux. It might be sticky, but can be cleaned up using alcohol (IPA)
+- wick is good. use wick.
 - for some components, don't be afraid to turn up the temperature (XT60s, chips with big heat slugs), but keep within max. recommended temperature based on datasheet
 - if you have the space, make the pads of the footprint longer
