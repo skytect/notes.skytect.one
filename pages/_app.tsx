@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { AppLayoutProps } from 'next/app'
-import Prism from 'prism-react-renderer'
+import { Prism } from 'prism-react-renderer'
 import 'nextra-theme-docs/style.css'
 
 import '@/styles/style.scss'
@@ -13,3 +13,6 @@ export default function Nextra({ Component, pageProps }: AppLayoutProps) {
 
 // Code highlighting
 ;(typeof global !== 'undefined' ? global : window).Prism = Prism
+
+require('prismjs/components/prism-java')
+require('prismjs/components/prism-docker')
