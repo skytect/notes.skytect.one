@@ -6,13 +6,13 @@
     "title": "Introduction",
     "display": "hidden"
   },
+  "linguistics": {
+    "title": "Linguistics"
+  },
   "hacking": {
     "title": "Hacking"
   },
   "robotics": {
     "title": "Robotics"
-  },
-  "linguistics": {
-    "title": "Linguistics"
   }
 }

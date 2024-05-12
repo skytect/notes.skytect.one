@@ -171,3 +171,8 @@ pre,
 samp {
   font-family: 'JetBrainsMono', monospace;
 }
+
+// overide block quotes so they won't be italic by default
+blockquote {
+  font-style: normal !important;
+}
