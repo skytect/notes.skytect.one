@@ -1,0 +1,191 @@
+import { ReactPlayer } from '@/components/react-player'
+
+# Logbook
+
+## February 2023
+
+### 22 February
+
+```
+kiid
+- one way to reduce errors while soldering is just to cut off useless pins 🤣
+- make sure pads and heat slugs are clear of solder before soldering on (use solderpaste)
+```
+
+### 21 February
+
+```
+kiid
+- we are going france 🇫🇷  (provided everything else works as intended LOL)
+- I need to find a more reliable method of soldering
+- more or less waiting for taobao parts to arrive before first bot is made and tested
+```
+
+<ReactPlayer
+  url={'/images/robocup/logbook-20230221-1.mp4'}
+  controls={true}
+  playing={true}
+  width={'100%'}
+/>
+
+### 20 February
+
+```
+kiid
+- fixed shorting
+- fixed driver heat slugs not touching pcb
+- *why doesn't the driver work???*
+might have fried it when desoldering idk
+
+- desoldered resoldered still no output unsure why
+- will try another method of solder tmr
+    = only solder the required pins (ina, inb, pwm, ena, enb, gnd)
+    = solder paste rather than solder on the slugs
+```
+
+### 17 February
+
+```
+kiid
+- LDRs work
+- STM32 work
+- LEDs work
+- bucks work
+- motor 12v and gnd shorted; will debug next week
+```
+
+### 11 February
+
+```
+prototype of bot assembled!!!
+```
+
+### 10 February
+
+```
+kiid
+- received PCBs
+- started soldering
+```
+
+### 6 February
+
+```
+kiid
+- finished designing v1 of l1, l2 and l3
+- ordered pcbs
+```
+
+## January 2023
+
+### 24 January
+
+```
+kiid
+- https://electronics.stackexchange.com/questions/291483/why-the-inductor-size-increases-even-when-the-value-of-the-inductor-is-same
+```
+
+### 20–24 January
+
+```
+kiid
+- long cny break
+```
+
+### 15–19 January
+
+```
+kiid
+- my boost and kicker control circuit works!!
+```
+
+### 9 January
+
+```
+kiid
+- tested stm32 test pcb
+- worked
+- start work on main pcb
+
+current plan:
+- ditching f401; remain on f103cbt6; will attempt to make f401 work when time permits
+- ditching usb comparability; use swd to program instead
+- single mosfet kicker activator circuit, as I am sceptical of the amount of heat that is reasonably dissipated during a normal match
+```
+
+### 3 January
+
+```
+kiid
+- finished and ordered stm32 test pcb
+```
+
+### 1 January
+
+```
+kiid
+- new year
+```
+
+## December 2022
+
+```
+kiid
+- hokkaido
+- nothing on my test pcb works lol
+```
+
+## November 2022
+
+### 24 November
+
+```
+kiid
+- finished and ordered test pcb #1
+```
+
+### 14 November
+
+```
+kiid
+- usb data uses differential pairs coolz
+```
+
+### 8 November
+
+```
+kiid
+- testing new way of activating solenoid with only 1 mosfet
+    = logic level power MOSFET (IRLB3036PbF)
+        == Rds(on) at 4.5V of 2mΩ
+        == Vdss of 60V (so cannot charge solenoid up too high)
+    = power mosfet with good specs (IRFB4110PbF)
+        == Rds(on) at 5V of <66mΩ
+        == Vdss of 100V
+        == requires open drain mod + ext pull-up on stm32
+```
+
+## October 2022
+
+### 15 October
+
+```
+kiid
+- figured how to create 3d models of chips using Fusion 360's package generator 🥳
+```
+
+### 13 October
+
+```
+kiid
+- started to brainstorm about possible improvements to robot
+- read up on specs on different stm32 series
+```
+
+### 12 October
+
+```
+kiid
+- bruh i finally know whats a capcitor
+- vias are inductors
+```

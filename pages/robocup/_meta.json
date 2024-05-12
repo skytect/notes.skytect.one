@@ -2,5 +2,6 @@
   "index": "Introduction",
   "mech": "Mechanical Design",
   "elec": "Electronics Design",
-  "prog": "Software Design"
+  "prog": "Software Design",
+  "logbook": "Logbook"
 }
