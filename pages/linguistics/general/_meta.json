@@ -1,0 +1,9 @@
+{
+  "morphology": "Morphology",
+  "phonology": "Phonology",
+  "semantics": "Lexical Semantics",
+  "syntax": "Syntax",
+  "sfg": "SFG",
+  "pragmatics": "Pragmatics",
+  "discourse": "Discourse Analaysis"
+}

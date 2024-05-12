@@ -1,8 +1,5 @@
 {
   "index": "Introduction",
-  "crypto": "Cryptography",
-  "forensics": "Forensics",
-  "re": "Reverse Engineering",
-  "pwn": "Binary Exploitation",
+  "networking": "Networking",
   "writeups": "Writeups"
 }
