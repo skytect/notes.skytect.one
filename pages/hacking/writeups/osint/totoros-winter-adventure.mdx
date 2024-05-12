@@ -1,0 +1,440 @@
+# Totoro's Winter Adventure Part 1
+
+## Description
+
+CTF: Sieberrsec CTF 4.0
+
+Totoro on a winter adventure, \
+In the snowy land he roam, \
+He had a merry Christmas, \
+And now it's time to roam.
+
+The next day, Totoro boards a big bird, \
+That takes to the sky with all its might, \
+Part of a starry alliance, soaring high, \
+On a journey through the winter night.
+
+He goes by @totorogoesnyan, \
+Sharing all his travels with delight, \
+He'd like to be reminded of the flight, \
+The number and the time it took to the skies.
+
+So let's all follow @totorogoesnyan, \
+On his winter travels through the land, \
+We'll see where the big bird flies, \
+And all the adventures at hand.
+
+Example flag: `IRS{SQ123_1200}` \
+(Flight SQ123 which took off at 12:00 PM SGT)
+
+P.S. First blood for completing all parts gets an exclusive meet and greet with
+Totoro :0
+
+> Hint: What exactly does it mean to take to the skies?
+
+_Written by [@skytect](https://github.com/skytect)_
+
+## Solution
+
+### Analysing the Description
+
+First, what are we trying to find?
+
+> Example flag: `IRS{SQ123_1200}` \
+> (Flight SQ123 which took off at 12:00 PM SGT)
+
+We are looking for
+
+1. the flight number,
+2. the takeoff time.
+
+Next, let's analyse the poem.
+
+> Totoro on a winter adventure, \
+> In the snowy land he roam, \
+> He had a merry Christmas, \
+> And now it's time to roam.
+
+Winter and snow is involved. Christmas just passed.
+
+> The next day, Totoro boards a big bird, \
+> That takes to the sky with all its might,
+
+The plane is boarded the day after Christmas (26 Dec).
+
+> Part of a starry alliance, soaring high, \
+> On a journey through the winter sky.
+
+The airline operating the plane is part of the
+[Star Alliance](https://en.wikipedia.org/wiki/Star_Alliance), the world's
+largest global airline alliance. If you didn't already know this, Googling for
+`starry alliance` or `starry alliance plane` would've told you this.
+
+> He goes by @totorogoesnyan, \
+> Sharing all his travels with delight
+
+Totoro shares his travels on social media, by the handle `@totorogoesnyan`.
+
+> He'd like to be reminded of the flight, \
+> The number and the time it took to the skies.
+
+This is a repetition of what we are looking for.
+
+> So let's all follow @totorogoesnyan, \
+> On his winter travels through the land, \
+> We'll see where the big bird flies, \
+> And all the adventures at hand.
+
+This social media platform uses the verb `follow`. Though, most do so this
+doesn't help much.
+
+### Digging on Social Media
+
+First, let's try Googling for `@totorogoesnyan`. A simple search query
+`"totorogoesnyan"` yields nothing. This means that it probably hasn't been
+indexed by Google yet.
+
+Thus, we have to turn to the search engines of the individual social media
+platforms. If we try searching on the large social media platforms, we find that
+there is a user that goes by
+[`@totorogoesnyan`](https://www.instagram.com/totorogoesnyan/) on Instagram.
+
+![](/images/sieberrsec-ctf-2022/totoros-winter-adventure-1.png)
+
+At this point, we should look specifically for posts made on 26 Dec on
+[`@totorogoesnyan`](https://www.instagram.com/totorogoesnyan/). Many got mislead
+by the following post which shows a plane wing, but was on 24 Dec. It was
+actually a separately booked flight from SIN-TPE :P
+
+![](/images/sieberrsec-ctf-2022/totoros-winter-adventure-2.png)
+
+These are all the posts from 26 Dec:
+
+![](/images/sieberrsec-ctf-2022/totoros-winter-adventure-3.png)
+
+![](/images/sieberrsec-ctf-2022/totoros-winter-adventure-4.png)
+
+![](/images/sieberrsec-ctf-2022/totoros-winter-adventure-5.png)
+
+![](/images/sieberrsec-ctf-2022/totoros-winter-adventure-6.png)
+
+Notably, the second post is from a view of the departure area at what is
+probably an airport terminal, and the fourth post is from immigration at what is
+probably an airport too.
+
+It seems that these posts include locations too! If we copy and paste these
+locations into Google, we find that the second and third post were taken in
+`Taoyuan International Airport (TPE) Terminal 2` and the fourth in
+`New Chitose Airport (CTS) International Terminal`
+
+Since the second and third post are both at the airport, one can reasonably
+assume the third post is at an airport lounge in the departure area. Since the
+fourth post is at a different airport, one can reasonably assume the immigration
+is at the arrival area. Thus, the flight must be from TPE to CTS.
+
+Let's check the exact times these posts were made. To check beneath surface of
+what the user interface of a website tells you, the first thing to try is to
+check the sorce code. By using the `Inspect Element` tool to check the source
+code, we find the exact time of the posts.
+
+![](/images/sieberrsec-ctf-2022/totoros-winter-adventure-7.png)
+
+After converting to SGT (UTC+8), the post times are
+
+- 08:15:43 (TPE)
+- 08:28:57 (TPE)
+- 15:49:10 (CTS)
+
+### Finding the Flight
+
+This gives us a time range of 7 h 20 min to work with. Since boarding usually
+takes place 30 min before the gate closes and Totoro was still at the lounge, it
+would be reasonable to shift the lower bound of the time range up by 30 min.
+Also considering the time it took to deplane and get from the gate to the
+immigration hall at CTS, it would be reasonable to assume Totoro flew within a
+6.5 h period.
+
+A direct flight from TPE to CTS usually takes about 3.5 h. There are two major
+transit stops for flights between TPE and CTS. If flying through HND, the
+flights take approximately 2 h 50 min and 1 h 35 min respectively. If flying
+through KIX, the flights take approximately 2 h 25 min and 1 h 55 min
+respectively. Thus, it would be reasonable to also consider the option that
+Totoro made a transit stop. However, since the challenge only asks for one
+flight number, let's try looking for direct flights first.
+
+There are many sites with freely available historical flight information. One of
+the most common sites is [www.flightradar24.com](https://www.flightradar24.com),
+which gives us a list of daily flights from TPE-CTS. There are many other sites
+you can use for this, and Googling would easily help you find them.
+
+![](/images/sieberrsec-ctf-2022/totoros-winter-adventure-8.png)
+
+These seem to be the flights from TPE-CTS:
+
+- 0555–1030, `IT234` (Tigerair Taiwan)
+- 0835–1310, `CI130` (China Airlines)
+- 0925–1400, `JX850` (Starlux)
+- 0930–1405, `BR116` (EVA Air)
+
+Based on the scheduled times of the flights, we should be considering `CI130`,
+`JX850`, and `BR116`. At this point, it is worth noting that posts can only be
+made after an event and not before, which we should keep in mind whenever we are
+looking for time information on social media.
+
+Upon checking through which airlines are in the
+[Star Alliance](https://en.wikipedia.org/wiki/Star_Alliance) mentioned in the
+poem, we actually narrow this down to `BR116`.
+
+Submitting `IRS{BR116_0930}` at this point would fail. This is because the
+scheduled departure time of flights usually refers to the time of departure from
+the gate. The plane still has to taxi to the runway before it can take off. Many
+failed to realise that the challenge was asking for the takeoff time
+specifically.
+
+> Hint: What exactly does it mean to take to the skies?
+
+Those who purchased the hint could refer to it to realise this.
+
+The specific takeoff time is usually not released by airlines or airports.
+However, it is recorded in many flight tracker websites. These websites use
+[ADS-B](https://en.wikipedia.org/wiki/Automatic_Dependent_Surveillance%E2%80%93Broadcast)
+information to track the locations of planes with their transponders on
+throughout the flight.
+
+![](/images/sieberrsec-ctf-2022/totoros-winter-adventure-9.png)
+
+[planefinder.net](https://planefinder.net) is one of the sites that offers this
+feature. As you can see, the flight on 12 Jan was at the start of the runway
+at 0948. Unfortunately, I couldn't get a screenshot of the 26 Dec flight because
+it requires a paid subscription. However, at the time of the CTF the 26 Dec
+flight history was still available on [planefinder.net](https://planefinder.net)
+for free, which also showed that the plane was at the start of the runway at
+0948, and took off furter down the runway at 0949.
+
+Many who tried to find the historical ADS-B information were faced with paywalls
+and got stuck from there. However, there are actually several ways to bypass
+paywalls on these sites. For example, one of the participants used
+[web.archive.org](http://web.archive.org).
+
+I tried a different method that worked on
+[flightaware.com](https://flightaware.com), which also happened to be the first
+result on Google for me. It provided flight history with links that looked like
+`https://flightaware.com/live/flight/EVA116/history/20221231/0140Z/RCTP/RJCC`. I
+simply changed the date to `20221226` and got past the paywall.
+
+![](/images/sieberrsec-ctf-2022/totoros-winter-adventure-10.png)
+
+This site clearly shows the takeoff time as 0949. Note that CST here refers to
+China Standard Time (UTC+8), not the more common Central Standard Time (UTC-6).
+One would be able to infer this because that is the timezone used in the origin
+airport which is in Taiwan.
+
+If we try submitting BR116 which took off around 0949, it works. 0948 and
+codeshare flight numbers were also accepted.
+
+`IRS{BR116_0949}`
+
+Accepted flags:
+
+- `IRS{BR116_0949}` 10 solves
+- `IRS{BR116_0948}` 0 solves
+- `IRS{NZ4908_0949}` 1 solve
+- `IRS{NZ4908_0948}` 0 solves
+- `IRS{NH5816_0949}` 0 solves
+- `IRS{NH5816_0948}` 0 solves
+
+<br />
+
+# Totoro's Winter Adventure Part 2
+
+## Description
+
+CTF: Sieberrsec CTF 4.0
+
+Totoro, the loveable creature, \
+Partook in a wintery feature, \
+Sliding down the snowy mountain, \
+On two long plastic boards counting,
+
+A video of Totoro's escapades, \
+Leaked onto the dark web shades, \
+Where only the tech-savvy can see, \
+The furry friend's ski escapade spree.
+
+Totoro went down three untrivial slopes, \
+Of significant steepness, as it copes, \
+The middle slope was used to cut across, \
+The other two slopes, no time to dawdle or pause.
+
+But this middle slope was bumpy, oh so rough, \
+Totoro hung on tight, that was enough, \
+To make it through the bumps and the jumps, \
+And safely make it down, no time to dump.
+
+But what was the name of that first slope, \
+The one where Totoro first had to cope, \
+With the icy winds and the snowy trails, \
+The one that started Totoro's snowy escapades?
+
+[https://go.skytect.one/totoroski](https://go.skytect.one/totoroski)
+
+Example flag: `IRS{Fun Course 1-A}` \
+(The example's first slope is called "Fun Course 1-A")
+
+P.S. First blood for completing all parts gets an exclusive meet and greet with
+Totoro :0
+
+_Written by [@skytect](https://github.com/skytect)_
+
+## Solution
+
+### Analysing the Description
+
+> Example flag: `IRS{Fun Course 1-A}` \
+> (The example's first slope is called "Fun Course 1-A")
+
+We're looking for a ski slope this time :0
+
+The poem:
+
+> Totoro, the loveable creature, \
+> Partook in a wintery feature, \
+> Sliding down the snowy mountain, \
+> On two long plastic boards counting,
+
+Sliding down a snowy mountain on two long plastic boards—skiing.
+
+> A video of Totoro's escapades, \
+> Leaked onto the dark web shades, \
+> Where only the tech-savvy can see, \
+> The furry friend's ski escapade spree.
+
+There's a video of it somewhere. We find it in the link below
+([https://go.skytect.one/totoroski](https://go.skytect.one/totoroski)).
+
+> Totoro went down three untrivial slopes, \
+> Of significant steepness, as it copes, \
+> The middle slope was used to cut across, \
+> The other two slopes, no time to dawdle or pause.
+
+Three slopes that were not that easy. The middle slope used to cut across frm
+one slope to the other?
+
+> But this middle slope was bumpy, oh so rough, \
+> Totoro hung on tight, that was enough, \
+> To make it through the bumps and the jumps, \
+> And safely make it down, no time to dump.
+
+The middle slope was particularly bumpy?
+
+> But what was the name of that first slope, \
+> The one where Totoro first had to cope, \
+> With the icy winds and the snowy trails, \
+> The one that started Totoro's snowy escapades?
+
+Look for the name of the first of three slopes Totoro went down.
+
+### Looking Through the Video
+
+At this point, we have to refer to the video to figure out more information.
+
+[WIP]
+
+`IRS{Center A}`
+
+Accepted flags:
+
+- `IRS{Center A}` 9 solves
+
+<br />
+
+# Totoro's Winter Adventure Part 3
+
+## Description
+
+CTF: Sieberrsec CTF 4.0
+
+Totoro visited a beach, \
+Near an airport within reach, \
+On an island country that retreated, \
+From the mainland, its fate met.
+
+The beach was along the western coastline, \
+Usually crowded during summertime, \
+But eerily quiet when Totoro came, \
+In the winter's chill, a different game.
+
+Next to the beach was a harbour full, \
+Of fishing boats and nautical hull, \
+A rainbow bridge stood tall and proud, \
+But alas, it was not at all rainbow, not a single shade aloud.
+
+What was the name of the road that went, \
+Through the entire harbour, its intent, \
+To connect and connect, from side to side, \
+This road that Totoro often did abide?
+
+Example flag: `IRS{Haibian Rd}` \
+(The example's road on an English version of Google Maps is called "Haibian Rd")
+
+P.S. First blood for completing all parts gets an exclusive meet and greet with
+Totoro :0
+
+_Written by [@skytect](https://github.com/skytect)_
+
+## Solution
+
+### Analysing the Description
+
+> Example flag: `IRS{Haibian Rd}` \
+> (The example's road on an English version of Google Maps is called "Haibian Rd")
+
+We need to find the English name of a road on Google Maps.
+
+Poem:
+
+> Totoro visited a beach, \
+> Near an airport within reach, \
+
+We're looking for a beach near an airport.
+
+> On an island country that retreated, \
+> From the mainland, its fate met.
+
+It's likely in Taiwan. This can be inferred from the Instagram in previous
+parts.
+
+> The beach was along the western coastline, \
+> Usually crowded during summertime, \
+> But eerily quiet when Totoro came, \
+> In the winter's chill, a different game.
+
+The beach is on the western coast. It also happens to be mostly frequented
+during the summer.
+
+> Next to the beach was a harbour full, \
+> Of fishing boats and nautical hull, \
+
+The beach was next to a fishing boat harbour.
+
+> A rainbow bridge stood tall and proud, \
+> But alas, it was not at all rainbow, not a single shade aloud.
+
+A rainbow bridge that isn't rainbow in colour?
+
+> What was the name of the road that went, \
+> Through the entire harbour, its intent, \
+> To connect and connect, from side to side, \
+> This road that Totoro often did abide?
+
+We're looking for the road that goes through the entire harbour.
+
+### Searching for the Search Space
+
+[WIP]
+
+`IRS{Yugang Rd}`
+
+Accepted flags:
+
+- `IRS{Yugang Rd}` 8 solves
