@@ -67,21 +67,30 @@ export default {
       <span style={{ marginLeft: '.5em', fontWeight: 600 }}>skytect</span>
     </>
   ),
+  search: {
+    emptyResult: 'Nothing found!',
+    loading: 'Searching...',
+    error: 'An error occurred??',
+    placeholder: 'Search notes...',
+  },
   // Sidebar
   sidebar: {
-    defaultMenuCollapsedLevel: 2,
+    defaultMenuCollapseLevel: 2,
+    autoCollapse: true,
+    toggleButton: true,
   },
   // TOC Sidebar
   toc: {
     float: true,
     title: 'On This Page',
+    backToTop: true,
   },
   feedback: {
     content: 'Question? Give feedback',
     labels: 'feedback',
   },
   editLink: {
-    content: 'Edit this page',
+    text: 'Edit this page',
   },
   // Footer
   footer: {
